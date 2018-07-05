@@ -5,8 +5,13 @@ export function loginByUsername(username, password) {
     username,
     password
   }
+  // return request({
+  //   url: '/ic/magic/users/login/',
+  //   method: 'post',
+  //   data
+  // })
   return request({
-    url: '/ic/magic/users/login/',
+    url: '/login/login',
     method: 'post',
     data
   })
@@ -20,8 +25,13 @@ export function logout() {
 }
 // 获取用户详情（首页）
 export function getUserInfo(token) {
+  // return request({
+  //   url: '/ic/magic/index/',
+  //   method: 'get',
+  //   params: { token }
+  // })
   return request({
-    url: '/ic/magic/index/',
+    url: '/user/info',
     method: 'get',
     params: { token }
   })
