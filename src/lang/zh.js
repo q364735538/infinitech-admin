@@ -15,6 +15,8 @@ export default {
     freightConfig: '运费配置',
     webInfo: '网站信息',
     powerManagement: '权限管理',
+    Administrators: '管理员',
+    roles: '角色',
     dashboard: '首页',
     introduction: '简述',
     documentation: '文档',
@@ -111,6 +113,10 @@ export default {
     imageUploadTips: '由于我在使用时它只有vue@1版本，而且和mockjs不兼容，所以自己改造了一下，如果大家要使用的话，优先还是使用官方版本。'
   },
   table: {
+    NewlyAdded: '新增',
+    role: '角色',
+    roleName: '角色名称',
+    power: '角色权限',
     dynamicTips1: '固定表头, 按照表头顺序排序',
     dynamicTips2: '不固定表头, 按照点击顺序排序',
     dragTips1: '默认顺序',

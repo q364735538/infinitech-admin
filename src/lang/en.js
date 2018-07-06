@@ -14,6 +14,8 @@ export default {
     freightConfig: 'freight Config',
     webInfo: 'web info',
     powerManagement: 'power Management',
+    Administrators: 'Administrators',
+    roles: 'roles',
     dashboard: 'Dashboard',
     introduction: 'Introduction',
     documentation: 'Documentation',
@@ -110,6 +112,10 @@ export default {
     imageUploadTips: 'Since I was using only the vue@1 version, and it is not compatible with mockjs at the moment, I modified it myself, and if you are going to use it, it is better to use official version.'
   },
   table: {
+    NewlyAdded: 'NewlyAdded',
+    role: 'role',
+    roleName: 'role Name',
+    power: 'power',
     dynamicTips1: 'Fixed header, sorted by header order',
     dynamicTips2: 'Not fixed header, sorted by click order',
     dragTips1: 'The default order',
