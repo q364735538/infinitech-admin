@@ -1,13 +1,12 @@
 import { asyncRouterMap, constantRouterMap } from '@/router'
-
-/**
- * 通过meta.role判断是否与当前用户权限匹配
- * @param roles
- * @param route
- */
-function hasPermission(roles, route) {
+// 通过route.name判断是否与当前用户权限匹配
+function hasPermission(modules, route) {
   if (route.meta && route.meta.roles) {
-    return roles.some(role => route.meta.roles.indexOf(role) >= 0)
+    for (let index = 0; index < modules.length; index++) {
+      return modules[index] == String(route.meta.roles)
+    }
+    // console.log(route.meta.roles[modules])
+    // return true
   } else {
     return true
   }
@@ -18,16 +17,17 @@ function hasPermission(roles, route) {
  * @param asyncRouterMap
  * @param roles
  */
-function filterAsyncRouter(asyncRouterMap, roles) {
+function filterAsyncRouter(asyncRouterMap, modules) {
   const accessedRouters = asyncRouterMap.filter(route => {
-    if (hasPermission(roles, route)) {
+    if (hasPermission(modules, route)) {
       if (route.children && route.children.length) {
-        route.children = filterAsyncRouter(route.children, roles)
+        route.children = filterAsyncRouter(route.children, modules)
       }
       return true
     }
     return false
   })
+  console.log(accessedRouters)
   return accessedRouters
 }
 
@@ -43,16 +43,18 @@ const permission = {
     }
   },
   actions: {
-    GenerateRoutes({ commit }, data) {
+    GenerateRoutes({ commit }, modules) {
       return new Promise(resolve => {
-        const { roles } = data
-        let accessedRouters
-        if (roles.indexOf('admin') >= 0) {
-          accessedRouters = asyncRouterMap
-        } else {
-          accessedRouters = filterAsyncRouter(asyncRouterMap, roles)
-        }
+        const accessedRouters = filterAsyncRouter(asyncRouterMap, modules)
         commit('SET_ROUTERS', accessedRouters)
+        resolve()
+      })
+    },
+    move_modules({
+      commit
+    }, modules) {
+      return new Promise(resolve => {
+        commit('MOVE_MODULES', modules)
         resolve()
       })
     }

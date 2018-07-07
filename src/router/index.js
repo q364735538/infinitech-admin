@@ -32,6 +32,9 @@ export const constantRouterMap = [
     path: '',
     component: Layout,
     redirect: 'dashboard',
+    meta: {
+      roles: 'dashboard'
+    },
     children: [{
       path: 'dashboard',
       component: () => import('@/views/dashboard/index'),
@@ -54,12 +57,16 @@ export const asyncRouterMap = [
     component: Layout,
     redirect: '/product/product-management',
     name: 'product',
+    meta: {
+      roles: ['product']
+    },
     children: [
       { path: 'product-management', component: () => import('@/views/product/productManagement'), name: 'productManagement',
         meta: {
           title: 'productManagement',
           icon: 'product',
-          noCache: true
+          noCache: true,
+          roles: ['productManagement']
         }
       }
     ]
@@ -70,12 +77,16 @@ export const asyncRouterMap = [
     component: Layout,
     redirect: '/programme/programme-management',
     name: 'programme',
+    meta: {
+      roles: ['programme']
+    },
     children: [
       { path: 'programme-management', component: () => import('@/views/programme/programmeManagement'), name: 'programmeManagement',
         meta: {
           title: 'programmeManagement',
           icon: 'programme',
-          noCache: true
+          noCache: true,
+          roles: ['programmeManagement']
         }
       }
     ]
@@ -88,11 +99,12 @@ export const asyncRouterMap = [
     name: 'endProductManagement',
     meta: {
       title: 'endProductManagement',
-      icon: 'endProduct'
+      icon: 'endProduct',
+      roles: ['endProductManagement']
     },
     children: [
-      { path: 'endProduct-List', component: () => import('@/views/endProduct/endProductList'), name: 'endProductList', meta: { title: 'endProductList' }},
-      { path: 'endProduct-Customized', component: () => import('@/views/endProduct/endProductCustomized'), name: 'endProductCustomized', meta: { title: 'endProductCustomized' }}
+      { path: 'endProduct-List', component: () => import('@/views/endProduct/endProductList'), name: 'endProductList', meta: { title: 'endProductList', roles: ['endProductList'] }},
+      { path: 'endProduct-Customized', component: () => import('@/views/endProduct/endProductCustomized'), name: 'endProductCustomized', meta: { title: 'endProductCustomized', roles: ['endProductCustomized'] }}
     ]
   },
   // 用户管理
@@ -101,12 +113,16 @@ export const asyncRouterMap = [
     component: Layout,
     redirect: '/user/user-management',
     name: 'user',
+    meta: {
+      roles: ['user']
+    },
     children: [
       { path: 'user-management', component: () => import('@/views/user/userManagement'), name: 'userManagement',
         meta: {
           title: 'userManagement',
           icon: 'userMe',
-          noCache: true
+          noCache: true,
+          roles: ['userManagement']
         }
       }
     ]
@@ -117,49 +133,54 @@ export const asyncRouterMap = [
     component: Layout,
     redirect: '/order/order-management',
     name: 'Order',
+    meta: {
+      roles: ['Order']
+    },
     children: [
       { path: 'order-management', component: () => import('@/views/order/orderManagement'), name: 'orderManagement',
         meta: {
           title: 'orderManagement',
           icon: 'order',
-          noCache: true
+          noCache: true,
+          roles: ['orderManagement']
         }
       }
     ]
   },
-  // 平台配置
-  {
-    path: '/platform',
-    component: Layout,
-    redirect: '/platform/parts-classify',
-    name: 'platform',
-    meta: {
-      title: 'platform',
-      icon: 'platform'
-    },
-    children: [
-      { path: 'parts-classify', component: () => import('@/views/platform/partsClassify'), name: 'partsClassify', meta: { title: 'partsClassify' }},
-      { path: 'programme-classify', component: () => import('@/views/platform/programmeClassify'), name: 'programmeClassify', meta: { title: 'programmeClassify' }},
-      { path: 'finished-product', component: () => import('@/views/platform/finishedProduct'), name: 'finishedProduct', meta: { title: 'finishedProduct' }},
-      { path: 'content-list', component: () => import('@/views/platform/contentList'), name: 'contentList', meta: { title: 'contentList' }},
-      { path: 'freight-config', component: () => import('@/views/platform/freightConfig'), name: 'freightConfig', meta: { title: 'freightConfig' }},
-      { path: 'web-info', component: () => import('@/views/platform/webInfo'), name: 'webInfo', meta: { title: 'webInfo' }}
-    ]
-  },
+  // // 平台配置
+  // {
+  //   path: '/platform',
+  //   component: Layout,
+  //   redirect: '/platform/parts-classify',
+  //   name: 'platform',
+  //   meta: {
+  //     title: 'platform',
+  //     icon: 'platform',
+  //     roles: ['platform']
+  //   },
+  //   children: [
+  //     { path: 'parts-classify', component: () => import('@/views/platform/partsClassify'), name: 'partsClassify', meta: { title: 'partsClassify' }},
+  //     { path: 'programme-classify', component: () => import('@/views/platform/programmeClassify'), name: 'programmeClassify', meta: { title: 'programmeClassify' }},
+  //     { path: 'finished-product', component: () => import('@/views/platform/finishedProduct'), name: 'finishedProduct', meta: { title: 'finishedProduct' }},
+  //     { path: 'content-list', component: () => import('@/views/platform/contentList'), name: 'contentList', meta: { title: 'contentList' }},
+  //     { path: 'freight-config', component: () => import('@/views/platform/freightConfig'), name: 'freightConfig', meta: { title: 'freightConfig' }},
+  //     { path: 'web-info', component: () => import('@/views/platform/webInfo'), name: 'webInfo', meta: { title: 'webInfo' }}
+  //   ]
+  // },
   // 权限管理
   {
-    path: '/power',
+    path: '/powerManagement',
     component: Layout,
-    redirect: '/power/power-management',
-    name: 'power',
+    redirect: '/power/Administrators',
+    name: 'powerManagement',
+    meta: {
+      title: 'powerManagement',
+      icon: 'powerManagement',
+      roles: ['powerManagement']
+    },
     children: [
-      { path: 'power-management', component: () => import('@/views/power/powerManagement'), name: 'powerManagement',
-        meta: {
-          title: 'powerManagement',
-          icon: 'power',
-          noCache: true
-        }
-      }
+      { path: 'Administrators', component: () => import('@/views/power/Administrators'), name: 'Administrators', meta: { title: 'Administrators', roles: ['Administrators'] }},
+      { path: 'roles', component: () => import('@/views/power/roles'), name: 'roles', meta: { title: 'roles', roles: ['roles'] }}
     ]
   },
   // {
@@ -315,12 +336,6 @@ export const asyncRouterMap = [
   //   alwaysShow: true,
   //   meta: { title: 'zip', icon: 'zip' },
   //   children: [{ path: 'download', component: () => import('@/views/zip/index'), name: 'exportZip', meta: { title: 'exportZip' }}]
-  // },
-
-  // {
-  //   path: '/i18n',
-  //   component: Layout,
-  //   children: [{ path: 'index', component: () => import('@/views/i18n-demo/index'), name: 'i18n', meta: { title: 'i18n', icon: 'international' }}]
   // },
 
   { path: '*', redirect: '/404', hidden: true }
