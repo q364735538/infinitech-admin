@@ -1,14 +1,26 @@
-import { asyncRouterMap, constantRouterMap } from '@/router'
+import {
+  asyncRouterMap,
+  constantRouterMap
+} from '@/router'
 // 通过route.name判断是否与当前用户权限匹配
 function hasPermission(modules, route) {
   if (route.meta && route.meta.roles) {
-    for (let index = 0; index < modules.length; index++) {
-      return modules[index] == String(route.meta.roles)
-    }
-    // console.log(route.meta.roles[modules])
-    // return true
+    // return modules.some(function A(name) {
+    // if(name.children.prototype.toString.call([]) && name.children <= 1){
+    //   for (let index = 0; index < name.children.length; index++) {
+    //     if (name.children[index].name != route.name) {
+    //       for (let i = 0; index < name.children.length; i++) {
+    //         return route.meta.roles.indexOf(name.children[i].name) >= 0
+    //       }
+    //     } else {
+    //       console.log(route.meta.roles.indexOf(name.children[index].name) >= 0)
+    //       return route.meta.roles.indexOf(name.children[index].name) >= 0
+    //     }
+    //   }
+    // })
+    return modules.some(name => route.meta.roles.indexOf(name.name) >= 0)
   } else {
-    return true
+    return false
   }
 }
 
@@ -27,7 +39,6 @@ function filterAsyncRouter(asyncRouterMap, modules) {
     }
     return false
   })
-  console.log(accessedRouters)
   return accessedRouters
 }
 
@@ -43,7 +54,9 @@ const permission = {
     }
   },
   actions: {
-    GenerateRoutes({ commit }, modules) {
+    GenerateRoutes({
+      commit
+    }, modules) {
       return new Promise(resolve => {
         const accessedRouters = filterAsyncRouter(asyncRouterMap, modules)
         commit('SET_ROUTERS', accessedRouters)

@@ -132,9 +132,9 @@ export const asyncRouterMap = [
     path: '/order',
     component: Layout,
     redirect: '/order/order-management',
-    name: 'Order',
+    name: 'order',
     meta: {
-      roles: ['Order']
+      roles: ['order']
     },
     children: [
       { path: 'order-management', component: () => import('@/views/order/orderManagement'), name: 'orderManagement',

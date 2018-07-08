@@ -15,7 +15,6 @@ NProgress.configure({ showSpinner: false })// NProgress Configuration
 // }
 
 const whiteList = ['/login', '/authredirect']// no redirect whitelist
-
 router.beforeEach((to, from, next) => {
   NProgress.start() // start progress bar
   if (getToken()) { // determine if there has token
@@ -26,47 +25,55 @@ router.beforeEach((to, from, next) => {
     } else {
       if (store.getters.addRouters.length === 0) { // 判断当前用户是否已拉取完user_info信息
         store.dispatch('GetUserInfo').then(res => { // 拉取user_info
-          const modules = [{
-            platform: {
-              name: 'platform',
-              hidden: false,
-              children: [
-                { name: 'partsClassify', hidden: false },
-                { name: 'programmeClassify', hidden: true },
-                { name: 'finishedProduct', hidden: false }
-                // { name: 'contentList' },
-                // { name: 'freightConfig' },
-                // { name: 'webInfo' }
-              ]
-            },
-            powerManagement: { name: 'powerManagement',
-              hidden: false,
-              children: [
-                { name: 'Administrators', hidden: false },
-                { name: 'roles', hidden: false }
-              ]
-            },
-            Order: {
-              name: 'Order',
-              hidden: false,
-              children: [
-                { name: 'orderManagement', hidden: false }
-              ]
-            },
-            product: {
-              name: 'product',
-              children: [
-                { path: 'product-management', component: () => import('@/views/product/productManagement'), name: 'productManagement',
-                  meta: {
-                    title: 'productManagement',
-                    icon: 'product',
-                    noCache: true
-                  }
-                }
-              ]
-            }
-          }]
-          // const modules = ['Order']
+          // const modules = [{
+          //   platform: {
+          //     name: 'platform',
+          //     hidden: false,
+          //     children: [
+          //       { name: 'partsClassify', hidden: false },
+          //       { name: 'programmeClassify', hidden: true },
+          //       { name: 'finishedProduct', hidden: false }
+          //       // { name: 'contentList' },
+          //       // { name: 'freightConfig' },
+          //       // { name: 'webInfo' }
+          //     ]
+          //   },
+          //   powerManagement: { name: 'powerManagement',
+          //     hidden: false,
+          //     children: [
+          //       { name: 'Administrators', hidden: false },
+          //       { name: 'roles', hidden: false }
+          //     ]
+          //   },
+          //   Order: {
+          //     name: 'Order',
+          //     hidden: false,
+          //     children: [
+          //       { name: 'orderManagement', hidden: false }
+          //     ]
+          //   },
+          //   product: {
+          //     name: 'product',
+          //     children: [
+          //       { path: 'product-management', component: () => import('@/views/product/productManagement'), name: 'productManagement',
+          //         meta: {
+          //           title: 'productManagement',
+          //           icon: 'product',
+          //           noCache: true
+          //         }
+          //       }
+          //     ]
+          //   }
+          // }]
+          const modules = [
+            { name: 'order' },
+            { name: 'orderManagement' },
+            { name: 'programmeManagement' },
+            { name: 'endProductCustomized' },
+            { name: 'endProductList' },
+            { name: 'endProductManagement' }
+          ]
+          // const modules = ['endProductCustomized', 'endProductList', 'endProductManagement', 'orderManagement', 'user', 'Order', 'userManagement', ]
           store.dispatch('GenerateRoutes', modules).then(() => { // 根据roles权限生成可访问的路由表
             router.addRoutes(store.getters.addRouters) // 动态添加可访问路由表
             next({ ...to, replace: true }) // hack方法 确保addRoutes已完成 ,set the replace: true so the navigation will not leave a history record
