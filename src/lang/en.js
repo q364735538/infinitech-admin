@@ -1,6 +1,7 @@
 export default {
   route: {
     productManagement: 'product Management',
+    productList: 'productList',
     programmeManagement: 'programme Management',
     endProductManagement: 'endProduct Management',
     endProductList: 'endProduct List',

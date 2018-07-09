@@ -25,54 +25,38 @@ router.beforeEach((to, from, next) => {
     } else {
       if (store.getters.addRouters.length === 0) { // 判断当前用户是否已拉取完user_info信息
         store.dispatch('GetUserInfo').then(res => { // 拉取user_info
-          // const modules = [{
-          //   platform: {
-          //     name: 'platform',
-          //     hidden: false,
-          //     children: [
-          //       { name: 'partsClassify', hidden: false },
-          //       { name: 'programmeClassify', hidden: true },
-          //       { name: 'finishedProduct', hidden: false }
-          //       // { name: 'contentList' },
-          //       // { name: 'freightConfig' },
-          //       // { name: 'webInfo' }
-          //     ]
-          //   },
-          //   powerManagement: { name: 'powerManagement',
-          //     hidden: false,
-          //     children: [
-          //       { name: 'Administrators', hidden: false },
-          //       { name: 'roles', hidden: false }
-          //     ]
-          //   },
-          //   Order: {
-          //     name: 'Order',
-          //     hidden: false,
-          //     children: [
-          //       { name: 'orderManagement', hidden: false }
-          //     ]
-          //   },
-          //   product: {
-          //     name: 'product',
-          //     children: [
-          //       { path: 'product-management', component: () => import('@/views/product/productManagement'), name: 'productManagement',
-          //         meta: {
-          //           title: 'productManagement',
-          //           icon: 'product',
-          //           noCache: true
-          //         }
-          //       }
-          //     ]
-          //   }
-          // }]
           const modules = [
-            { name: 'order' },
-            { name: 'orderManagement' },
-            { name: 'programmeManagement' },
-            { name: 'endProductCustomized' },
-            { name: 'endProductList' },
-            { name: 'endProductManagement' }
+            { ename: 'product', path: '/product', cname: '产品管理' },
+            { ename: 'productManagement', path: 'product-management', cname: '产品列表' },
+            { ename: 'programme', path: '/programme', cname: '方案管理' },
+            { ename: 'programmeManagement', path: 'programmeManagement', cname: '方案列表' },
+            { ename: 'endProductManagement', path: '/endProduct', cname: '成品管理' },
+            { ename: 'endProductList', path: 'endProductList', cname: '成品列表' },
+            { ename: 'endProductCustomized', path: 'endProductCustomized', cname: '成品制作' },
+            { ename: 'user', path: '/user', cname: '用户管理' },
+            { ename: 'userManagement', path: 'userManagement', cname: '用户列表' },
+            { ename: 'order', path: '/order', cname: '订单管理' },
+            { ename: 'orderManagement', path: 'orderManagement', cname: '用户列表' },
+            { ename: 'platform', path: '/platform', cname: '平台配置' },
+            { ename: 'partsClassify', path: 'partsClassify', cname: '器件分类' },
+            { ename: 'programmeClassify', path: 'programmeClassify', cname: '方案分类' },
+            { ename: 'finishedProduct', path: 'finishedProduct', cname: '成品分类' },
+            { ename: 'contentList', path: 'contentList', cname: '内容管理' },
+            { ename: 'freightConfig', path: 'freightConfig', cname: '运费配置' },
+            { ename: 'webInfo', path: 'webInfo', cname: '网页信息' },
+            { ename: 'powerManagement', path: '/powerManagement', cname: '权限管理' },
+            { ename: 'Administrators', path: 'Administrators', cname: '管理员' },
+            { ename: 'roles', path: 'roles', cname: '角色' }
+            // { ename: 'example', path: '/example', cname: '表当' },
+            // { ename: 'createArticle', path: 'createArticle', cname: '管员' },
+            // { ename: 'articleList', path: 'list', cname: '角' }
           ]
+          // var a = { ename: 'editArticle', path: 'edit/:id(\\d+)', cname: '角' }
+          // for (let index = 0; index < modules.length; index++) {
+          //   if (modules[index].ename === 'example') {
+          //     modules.push(a)
+          //   }
+          // }
           // const modules = ['endProductCustomized', 'endProductList', 'endProductManagement', 'orderManagement', 'user', 'Order', 'userManagement', ]
           store.dispatch('GenerateRoutes', modules).then(() => { // 根据roles权限生成可访问的路由表
             router.addRoutes(store.getters.addRouters) // 动态添加可访问路由表

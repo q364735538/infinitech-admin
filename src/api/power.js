@@ -1,20 +1,20 @@
 import request from '@/utils/request'
 // 获取角色列表
-export function fetchList(query) {
-  return request({
-    url: '/ic/magic/groups/',
-    method: 'get',
-    params: query
-  })
-}
-
 // export function fetchList(query) {
 //   return request({
-//     url: '/article/list',
+//     url: '/ic/magic/groups/',
 //     method: 'get',
 //     params: query
 //   })
 // }
+
+export function fetchList(query) {
+  return request({
+    url: '/article/list',
+    method: 'get',
+    params: query
+  })
+}
 
 export function fetchArticle(id) {
   return request({

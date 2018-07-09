@@ -1,6 +1,7 @@
 export default {
   route: {
     productManagement: '产品管理',
+    productList: '产品列表',
     programmeManagement: '方案管理',
     endProductManagement: '成品管理',
     endProductList: '成品列表',

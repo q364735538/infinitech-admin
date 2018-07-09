@@ -17,7 +17,7 @@ import Layout from '@/views/layout/Layout'
 * redirect: noredirect           if `redirect:noredirect` will no redirct in the breadcrumb 如果“重定向：NoeNeCube”将不会在面包屑中重新分配。
 * name:'router-name'             the name is used by <keep-alive> (must set!!!) 名称使用<保持活着>（必须设置）！！！！）
 * meta : {
-    roles: ['admin','editor']     will control the page roles (you can set multiple roles) 将控制页面角色（可以设置多个角色）
+    ename: 'order'
     title: 'title'               the name show in submenu and breadcrumb (recommend set) 在子菜单和面包屑中显示的名称（推荐集）
     icon: 'svg-name'             the icon show in the sidebar, 图标显示在边栏中
     noCache: true                if true ,the page will no be cached(default is false) 如果为真，则页面将不会被缓存（默认为false）
@@ -33,7 +33,7 @@ export const constantRouterMap = [
     component: Layout,
     redirect: 'dashboard',
     meta: {
-      roles: 'dashboard'
+      ename: 'dashboard'
     },
     children: [{
       path: 'dashboard',
@@ -58,7 +58,7 @@ export const asyncRouterMap = [
     redirect: '/product/product-management',
     name: 'product',
     meta: {
-      roles: ['product']
+      ename: ['product']
     },
     children: [
       { path: 'product-management', component: () => import('@/views/product/productManagement'), name: 'productManagement',
@@ -66,7 +66,7 @@ export const asyncRouterMap = [
           title: 'productManagement',
           icon: 'product',
           noCache: true,
-          roles: ['productManagement']
+          ename: ['productManagement']
         }
       }
     ]
@@ -78,7 +78,7 @@ export const asyncRouterMap = [
     redirect: '/programme/programme-management',
     name: 'programme',
     meta: {
-      roles: ['programme']
+      ename: ['programme']
     },
     children: [
       { path: 'programme-management', component: () => import('@/views/programme/programmeManagement'), name: 'programmeManagement',
@@ -86,7 +86,7 @@ export const asyncRouterMap = [
           title: 'programmeManagement',
           icon: 'programme',
           noCache: true,
-          roles: ['programmeManagement']
+          ename: ['programmeManagement']
         }
       }
     ]
@@ -95,16 +95,16 @@ export const asyncRouterMap = [
   {
     path: '/endProduct',
     component: Layout,
-    redirect: '/endProduct/endProduct-management',
+    redirect: '/endProduct/endProductlist',
     name: 'endProductManagement',
     meta: {
       title: 'endProductManagement',
       icon: 'endProduct',
-      roles: ['endProductManagement']
+      ename: ['endProductManagement']
     },
     children: [
-      { path: 'endProduct-List', component: () => import('@/views/endProduct/endProductList'), name: 'endProductList', meta: { title: 'endProductList', roles: ['endProductList'] }},
-      { path: 'endProduct-Customized', component: () => import('@/views/endProduct/endProductCustomized'), name: 'endProductCustomized', meta: { title: 'endProductCustomized', roles: ['endProductCustomized'] }}
+      { path: 'endProduct-List', component: () => import('@/views/endProduct/endProductList'), name: 'endProductList', meta: { title: 'endProductList', ename: ['endProductList'] }},
+      { path: 'endProduct-Customized', component: () => import('@/views/endProduct/endProductCustomized'), name: 'endProductCustomized', meta: { title: 'endProductCustomized', ename: ['endProductCustomized'] }}
     ]
   },
   // 用户管理
@@ -114,7 +114,7 @@ export const asyncRouterMap = [
     redirect: '/user/user-management',
     name: 'user',
     meta: {
-      roles: ['user']
+      ename: ['user']
     },
     children: [
       { path: 'user-management', component: () => import('@/views/user/userManagement'), name: 'userManagement',
@@ -122,7 +122,7 @@ export const asyncRouterMap = [
           title: 'userManagement',
           icon: 'userMe',
           noCache: true,
-          roles: ['userManagement']
+          ename: ['userManagement']
         }
       }
     ]
@@ -134,7 +134,7 @@ export const asyncRouterMap = [
     redirect: '/order/order-management',
     name: 'order',
     meta: {
-      roles: ['order']
+      ename: ['order']
     },
     children: [
       { path: 'order-management', component: () => import('@/views/order/orderManagement'), name: 'orderManagement',
@@ -142,31 +142,31 @@ export const asyncRouterMap = [
           title: 'orderManagement',
           icon: 'order',
           noCache: true,
-          roles: ['orderManagement']
+          ename: ['orderManagement']
         }
       }
     ]
   },
-  // // 平台配置
-  // {
-  //   path: '/platform',
-  //   component: Layout,
-  //   redirect: '/platform/parts-classify',
-  //   name: 'platform',
-  //   meta: {
-  //     title: 'platform',
-  //     icon: 'platform',
-  //     roles: ['platform']
-  //   },
-  //   children: [
-  //     { path: 'parts-classify', component: () => import('@/views/platform/partsClassify'), name: 'partsClassify', meta: { title: 'partsClassify' }},
-  //     { path: 'programme-classify', component: () => import('@/views/platform/programmeClassify'), name: 'programmeClassify', meta: { title: 'programmeClassify' }},
-  //     { path: 'finished-product', component: () => import('@/views/platform/finishedProduct'), name: 'finishedProduct', meta: { title: 'finishedProduct' }},
-  //     { path: 'content-list', component: () => import('@/views/platform/contentList'), name: 'contentList', meta: { title: 'contentList' }},
-  //     { path: 'freight-config', component: () => import('@/views/platform/freightConfig'), name: 'freightConfig', meta: { title: 'freightConfig' }},
-  //     { path: 'web-info', component: () => import('@/views/platform/webInfo'), name: 'webInfo', meta: { title: 'webInfo' }}
-  //   ]
-  // },
+  // 平台配置
+  {
+    path: '/platform',
+    component: Layout,
+    redirect: '/platform/parts-Classify',
+    name: 'platform',
+    meta: {
+      title: 'platform',
+      icon: 'platform',
+      ename: ['platform']
+    },
+    children: [
+      { path: 'parts-Classify', component: () => import('@/views/platform/partsClassify'), name: 'partsClassify', meta: { title: 'partsClassify', ename: ['partsClassify'] }},
+      { path: 'programme-classify', component: () => import('@/views/platform/programmeClassify'), name: 'programmeClassify', meta: { title: 'programmeClassify', ename: ['programmeClassify'] }},
+      { path: 'finished-product', component: () => import('@/views/platform/finishedProduct'), name: 'finishedProduct', meta: { title: 'finishedProduct', ename: ['finishedProduct'] }},
+      { path: 'content-list', component: () => import('@/views/platform/contentList'), name: 'contentList', meta: { title: 'contentList', ename: ['contentList'] }},
+      { path: 'freight-config', component: () => import('@/views/platform/freightConfig'), name: 'freightConfig', meta: { title: 'freightConfig', ename: ['freightConfig'] }},
+      { path: 'web-info', component: () => import('@/views/platform/webInfo'), name: 'webInfo', meta: { title: 'webInfo', ename: ['webInfo'] }}
+    ]
+  },
   // 权限管理
   {
     path: '/powerManagement',
@@ -176,11 +176,11 @@ export const asyncRouterMap = [
     meta: {
       title: 'powerManagement',
       icon: 'powerManagement',
-      roles: ['powerManagement']
+      ename: ['powerManagement']
     },
     children: [
-      { path: 'Administrators', component: () => import('@/views/power/Administrators'), name: 'Administrators', meta: { title: 'Administrators', roles: ['Administrators'] }},
-      { path: 'roles', component: () => import('@/views/power/roles'), name: 'roles', meta: { title: 'roles', roles: ['roles'] }}
+      { path: 'Administrators', component: () => import('@/views/power/Administrators'), name: 'Administrators', meta: { title: 'Administrators', ename: ['Administrators'] }},
+      { path: 'roles', component: () => import('@/views/power/roles'), name: 'roles', meta: { title: 'roles', ename: ['roles'] }}
     ]
   },
   // {
@@ -200,35 +200,6 @@ export const asyncRouterMap = [
   //     { path: 'custom-tree-table', component: () => import('@/views/table/treeTable/customTreeTable'), name: 'customTreeTableDemo', meta: { title: 'customTreeTable' }},
   //     { path: 'complex-table', component: () => import('@/views/table/complexTable'), name: 'complexTable', meta: { title: 'complexTable' }}
   //   ]
-  // },
-
-  // {
-  //   path: '/permission',
-  //   component: Layout,
-  //   redirect: '/permission/index',
-  //   alwaysShow: true, // will always show the root menu 将始终显示根菜单
-  //   meta: {
-  //     title: 'permission',
-  //     icon: 'lock',
-  //     roles: ['admin', 'editor'] // you can set roles in root nav 可以在根Nav中设置角色
-  //   },
-  //   children: [{
-  //     path: 'page',
-  //     component: () => import('@/views/permission/page'),
-  //     name: 'pagePermission',
-  //     meta: {
-  //       title: 'pagePermission',
-  //       roles: ['admin'] // or you can only set roles in sub nav 或者只能在子导航中设置角色
-  //     }
-  //   }, {
-  //     path: 'directive',
-  //     component: () => import('@/views/permission/directive'),
-  //     name: 'directivePermission',
-  //     meta: {
-  //       title: 'directivePermission'
-  //       // if do not set roles, means: this page does not require permission 如果不设置角色，则意味着：此页不需要许可。
-  //     }
-  //   }]
   // },
 
   // {
@@ -264,21 +235,22 @@ export const asyncRouterMap = [
   //   ]
   // },
 
-  // {
-  //   path: '/example',
-  //   component: Layout,
-  //   redirect: '/example/list',
-  //   name: 'example',
-  //   meta: {
-  //     title: 'example',
-  //     icon: 'example'
-  //   },
-  //   children: [
-  //     { path: 'create', component: () => import('@/views/example/create'), name: 'createArticle', meta: { title: 'createArticle', icon: 'edit' }},
-  //     { path: 'edit/:id(\\d+)', component: () => import('@/views/example/edit'), name: 'editArticle', meta: { title: 'editArticle', noCache: true }, hidden: true },
-  //     { path: 'list', component: () => import('@/views/example/list'), name: 'articleList', meta: { title: 'articleList', icon: 'list' }}
-  //   ]
-  // },
+  {
+    path: '/example',
+    component: Layout,
+    redirect: '/example/list',
+    name: 'example',
+    meta: {
+      title: 'example',
+      icon: 'example',
+      ename: ['example']
+    },
+    children: [
+      { path: 'create', component: () => import('@/views/example/create'), name: 'createArticle', meta: { title: 'createArticle', icon: 'edit', ename: ['createArticle'] }},
+      { path: 'edit/:id(\\d+)', component: () => import('@/views/example/edit'), name: 'editArticle', meta: { title: 'editArticle', noCache: true, ename: ['editArticle'] }, hidden: true },
+      { path: 'list', component: () => import('@/views/example/list'), name: 'articleList', meta: { title: 'articleList', icon: 'list', ename: ['articleList'] }}
+    ]
+  },
 
   // {
   //   path: '/nested',

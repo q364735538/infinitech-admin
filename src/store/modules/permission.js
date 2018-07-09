@@ -4,7 +4,7 @@ import {
 } from '@/router'
 // 通过route.name判断是否与当前用户权限匹配
 function hasPermission(modules, route) {
-  if (route.meta && route.meta.roles) {
+  if (route.meta && route.meta.ename) {
     // return modules.some(function A(name) {
     // if(name.children.prototype.toString.call([]) && name.children <= 1){
     //   for (let index = 0; index < name.children.length; index++) {
@@ -18,7 +18,7 @@ function hasPermission(modules, route) {
     //     }
     //   }
     // })
-    return modules.some(name => route.meta.roles.indexOf(name.name) >= 0)
+    return modules.some(name => route.meta.ename.indexOf(name.ename) >= 0)
   } else {
     return false
   }
@@ -54,11 +54,15 @@ const permission = {
     }
   },
   actions: {
-    GenerateRoutes({
-      commit
-    }, modules) {
+    GenerateRoutes({ commit }, modules) {
       return new Promise(resolve => {
-        const accessedRouters = filterAsyncRouter(asyncRouterMap, modules)
+        const a = false
+        let accessedRouters
+        if (a) {
+          accessedRouters = asyncRouterMap
+        } else {
+          accessedRouters = filterAsyncRouter(asyncRouterMap, modules)
+        }
         commit('SET_ROUTERS', accessedRouters)
         resolve()
       })

@@ -26,7 +26,7 @@ import treeTable from '@/components/TreeTable'
 import treeToArray from './customEval'
 
 export default {
-  name: 'programme',
+  name: 'programmeClassify',
   components: { treeTable },
   data() {
     return {
