@@ -169,8 +169,8 @@
                   <ol>
                     <div>
                     <h3 style="color:#579FEB"><span style="display:inline-block;width:10px;height:10px;margin-right:5px;background-color:#ccc;border-radius:50%;"></span>{{item.title}} <i :class="item.hot?'hot':''"></i></h3>
-                      <p ref="contentHeight" style="margin-left:15px;text-indent:2em;">{{item.content}}{{reversedMessage}}<span style="width:200px;">+展开更多</span></p>
-                      <div style="margin-left:15px;text-indent:1em;">关键元器件型号: <div style="color:#459BE2;display:inline-block;margin-right:20px" v-for="(li, i) in item.list" :key="i">{{li}}</div></div>
+                      <p ref="contentHeight" style="margin-left:15px;text-indent:2em;">{{item.content}}<span style="width:200px;">+展开更多</span></p>
+                      <div style="margin-left:15px;text-indent:1em;">关键元器件型号:{{textHeight}} <div style="color:#459BE2;display:inline-block;margin-right:20px" v-for="(li, i) in item.list" :key="i">{{li}}</div></div>
                     </div>
                   </ol>
                 </ul>
@@ -216,14 +216,22 @@ export default {
     Tinymce
   },
   computed: {
-    reversedMessage: function () {
-      // `this` 指向 vm 实例
-      return function (){
-        console.log(this.$refs.contentHeight)
-      }
+    textHeight: function() {
+      this.$nextTick(() => {
+        for (let index = 0; index < this.$refs.contentHeight.length; index++) {
+          console.log(this.$refs.contentHeight[index].offsetHeight)
+          if (this.$refs.contentHeight[index].offsetHeight > 70) {
+            return true
+          } else {
+            return false
+          }
+        }
+      })
     }
   },
   mounted() {
+    this.$nextTick(() => {
+    })
   },
   data() {
     return {
@@ -357,7 +365,6 @@ export default {
   },
   methods: {
     getList() {
-      console.log(this.$refs)
       this.listLoading = true
       fetchList(this.listQuery).then(response => {
         this.list = response.data.items
