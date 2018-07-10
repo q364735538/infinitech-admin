@@ -130,14 +130,8 @@
           <el-form-item label="方案描述及特性" prop="name">
             <tinymce :height="300" v-model="content"></tinymce>
           </el-form-item>
-          <el-form-item label="性质" prop="resource">
-            <el-radio-group v-model="ruleForm.resource">
-              <el-radio label="个人"></el-radio>
-              <el-radio label="企业"></el-radio>
-            </el-radio-group>
-          </el-form-item>
           <el-form-item label="源码上传" prop="name">
-            <el-button type="text" @click="innerVisible = true">点击上传源码</el-button><span style="color:#ccc">&nbsp;&nbsp;&nbsp;&nbsp;请打包成zip格式，不超过100M</span>
+            <el-button type="text" @click="innerVisible = true">点击上传源码</el-button><span style="color:#999">&nbsp;&nbsp;&nbsp;&nbsp;请打包成zip格式，不超过100M</span>
           </el-form-item>
           <el-dialog
             width="40%"
@@ -161,6 +155,36 @@
               </el-form-item>
             </el-form-item>
           </el-dialog>
+          <el-form-item label="方案成品" prop="name">
+            <el-upload
+              action="https://jsonplaceholder.typicode.com/posts/"
+              list-type="picture-card"
+              :on-preview="handlePictureCardPreview"
+              :on-remove="handleRemove">
+              <i class="el-icon-plus"></i>
+            </el-upload>
+            <el-dialog :visible.sync="dialogVisible">
+              <img width="100%" :src="dialogImageUrl" alt="">
+            </el-dialog>
+          </el-form-item>
+          <el-form-item label="性质" prop="resource">
+            <el-radio-group v-model="ruleForm.resource">
+              <el-radio label="个人"></el-radio>
+              <el-radio label="企业"></el-radio>
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="企业名称" prop="name">
+            <el-input v-model="ruleForm.name" style="width:30%"></el-input>
+          </el-form-item>
+          <el-form-item label="QQ" prop="name">
+            <el-input v-model="ruleForm.name" style="width:30%"></el-input>
+          </el-form-item>
+          <el-form-item label="邮箱" prop="name">
+            <el-input v-model="ruleForm.name" style="width:30%"></el-input>
+          </el-form-item>
+          <el-form-item  prop="name">
+            <el-checkbox v-model="checked3" label="是否参考设计" border></el-checkbox>
+          </el-form-item>
           <el-form-item style="text-align:center">
             <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
             <el-button @click="resetForm('ruleForm')">重置</el-button>
@@ -203,6 +227,7 @@ export default {
       list: null,
       total: null,
       listLoading: true,
+      checked3: false,
       listQuery: {
         page: 1,
         limit: 20,
@@ -428,7 +453,7 @@ export default {
     },
     // 源码上传
     handleChange(file, fileList) {
-      this.fileList3 = fileList.slice(-3);
+      this.fileList3 = fileList.slice(-3)
     }
   }
 }
@@ -450,6 +475,6 @@ export default {
     vertical-align: bottom;
   }
   .editor-content{
-  margin-top: 20px;
+    margin-top: 20px;
   }
 </style>

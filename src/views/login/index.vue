@@ -3,7 +3,7 @@
     <el-form class="login-form" autoComplete="on" :model="loginForm" :rules="loginRules" ref="loginForm" label-position="left">
       <div class="title-container">
         <h3 class="title">IC魔方后台管理系统</h3>
-        <lang-select class="set-language"></lang-select>
+        <!-- <lang-select class="set-language"></lang-select> -->
       </div>
       <el-form-item prop="username">
         <span class="svg-container svg-container_login">
@@ -29,11 +29,14 @@
 
 <script>
 import { isvalidUsername } from '@/utils/validate'
-import LangSelect from '@/components/LangSelect'
+// import LangSelect from '@/components/LangSelect'
 import Verification from './Verification'
 
 export default {
-  components: { LangSelect, Verification },
+  components: {
+    // LangSelect,
+    Verification
+  },
   name: 'login',
   data() {
     const validateUsername = (rule, value, callback) => {
